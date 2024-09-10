@@ -24,16 +24,3 @@ if(isThereSwallow == true){
 }else {
     console.log('Buy indomie, hungry  woman size 10');       
 }
-
-// Akin bought a piece of land for company
-var isTherethatownedofthehouse = "The owner of company" 
-    if (theLeader = true){
-        if (leader ='president'){           
-    } else if (theLeader= 'the staff'){
-        console.log('vice president')        
-    }else if (theLeader='the secretary'){
-        console.log('the Treasury');        
-    }    
-}else {
-    console.log('the leader of the company is the CEO');
-}
