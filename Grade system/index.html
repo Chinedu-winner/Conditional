@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grading system. </title>
+</head>
+<body>
+    <h1>Grading system</h1>
+    <p style ="color: red; display: none;" id='errorMsg'>Hba, when it is not like you can't see. </p>
+    <input type="number" placeholder="Score" id="score">
+    <button onclick="checkGrade()">Check</button>
+    <div id="display"></div>
+
+    <script>
+        // new Audi('shout.mp3')
+        function checkGrade(){
+            var userScore = document.getElementById('score').value
+            var newScore = Number(userScore)
+            if (userScore === ''){
+                alert("Hah, when you are coming back to school")
+                errorMsg.style.display = 'block'
+            }else {
+                errorMsg.style.display = 'none'
+                if (newScore >= 0 && newScore < 49 ){
+                    console.log('F - You fail');
+                }
+            }            
+        }
+    </script>
+</body>
+</html>
