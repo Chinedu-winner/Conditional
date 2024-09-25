@@ -51,7 +51,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="editCourse()">Save changes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="editCourse()">Save changes</button>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@ Modal -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="ChangeInfo()">Save changes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="ChangeInfo()">Save changes</button>
       </div>
     </div>
   </div>
@@ -85,6 +85,7 @@ Modal -->
 <script>
   var allCourses = [];
   var editIndex = []
+
 
   function addCourse() {
     if (course.value == "") {
@@ -148,21 +149,18 @@ Modal -->
     }
   }
 
-  var index
-function ChangeInfo(index){
+var cartindex
+  function editBtn(i){
+    cartindex = i
+    console.log(i)
+  } 
+
+function ChangeInfo(){
     if(TextToDelete.value === ''){
       alert ("Fill in empty space")
     } else {
-      allCourses.splice(index, 1, TextToDelete.value)
+      allCourses.splice(cartindex, 1, TextToDelete.value)
       showCourses()
-
-      // var checkCourse = Number(TextToDelete.value)
-      // if (checkCourse <= allCourses.length){
-      //   // console.log(checkCourse);
-      //   allCourses.splice(checkCourse -1, 1, TextToDelete.value)
-      // }else {
-      //   alert("You can made your changes.")
-      // }
     }
 }
 
@@ -208,7 +206,7 @@ function ChangeInfo(index){
           <td class="text-center">${i+1}.</td>
           <td class="text-center">${allCourses[i]}</td>
           <td class="text-center">
-            <button class="btn btn-sm btn-warning btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick=changeInfo(${index}) >Edit</button>
+            <button class="btn btn-sm btn-warning btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick=editBtn(${i}) >Edit</button>
             <button class="btn btn-sm btn-danger" onclick="deleteOne(${i})">Delete</button>
           </td>
         </tr>
