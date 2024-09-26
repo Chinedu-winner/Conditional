@@ -14,7 +14,9 @@
   <div class="container mx-auto mt-lg-5 mt-3 shadow px-lg-4 py-3 px-2">
     <h3 class="my-lg-4 my-2 text-center text-decoration-underline">School Portal</h3>
     <div class="alert alert-success p-2 text-center" id="errorMsg">It can't be blank. </div>
-    <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course"id="course">
+    <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter Your Course"id="course">
+    <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Instructor "id="instructor">
+    <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Course Title"id="courseTitle">
     <button onclick="addCourse()" class="btn btn-danger w-100 my-1 btn-1">Add course</button>
   </div>
 
@@ -47,7 +49,9 @@
         </div>
         <div class="modal-body">  
           <input type="number" class="form-control form-control-sm shadow-none my-3" placeholder="Enter the number to edit" id="numberToDelete">
-          <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course" id="newCourse">
+          <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course" id="GoCourse">
+          <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your title" id="Gotitle">
+          <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your instructor" id="Goinstructor">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -71,7 +75,9 @@ Modal -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course" id="TextToDelete">
+        <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course" id="newCourse">
+        <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your title" id="newTitle">
+        <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your instructor" id="newInstructor">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -83,20 +89,31 @@ Modal -->
 </body>
 
 <script>
-  var allCourses = [];
-  var editIndex = []
+  const allCourses = [];
+  let editIndex = []
 
-
-  function addCourse() {
-    if (course.value == "") {
+  const addCourse =() =>{
+    if (course.value == "" || courseTitle.value =='' || instructor.value =="") {
       errorMsg.style.display = "block";
+      setTimeout(()=>{
+        errorMsg.style.display = 'none'
+      }, 3000)
       throw new Error("No no now,");
     } else {
       errorMsg.style.display = "none";
       allButton.style.display = "block";
-      initalMsg;
-      allCourses.push(course.value);
+      initalMsg.style.display='none'
+      let courseObj = {
+        courseId: course.value,
+        title: courseTitle.value, 
+        ins: instructor.value
+      }
+      // allCourses.push(course.value);
+      // console.log(course);
+      allCourses.push(courseObj)
       document.getElementById("course").value = "";
+      document.getElementById("courseTitle").value = "";
+      document.getElementById("instructor").value = "";
       console.log(allCourses);
       showCourses();
     }
@@ -134,20 +151,24 @@ Modal -->
         }
     }
 
-  function editCourse(){
-    if(numberToDelete.value === ''|| newCourse.value === ""){
-      alert ("Fill in empty space")
+  function editCourse() {
+  if (numberToDelete.value === '' || GoCourse.value === '' || Gotitle.value === '' || Goinstructor.value === '') {
+    alert("Fill in empty spaces");
+  } else {
+    var courseIndex = Number(numberToDelete.value) - 1;
+    if (courseIndex >= 0 && courseIndex < allCourses.length) {
+      allCourses[courseIndex] = {
+        courseId: GoCourse.value,
+        title: Gotitle.value,
+        ins: Goinstructor.value,
+      };
+      showCourses();
     } else {
-      var checkCourse = Number(numberToDelete.value)
-      if (checkCourse <= allCourses.length){
-        // console.log(checkCourse);
-        allCourses.splice(checkCourse -1, 1,newCourse.value)
-        showCourses()
-      }else {
-        alert("Enter a valid number")
-      }
+      alert("Enter a valid course number");
     }
   }
+}
+
 
 var cartindex
   function editBtn(i){
@@ -156,10 +177,16 @@ var cartindex
   } 
 
 function ChangeInfo(){
-    if(TextToDelete.value === ''){
+    if(newCourse.value === ''|| newTitle.value== '' || newInstructor.value == ''){
       alert ("Fill in empty space")
     } else {
-      allCourses.splice(cartindex, 1, TextToDelete.value)
+      let newCourseObj = {
+        courseId: newCourse.value,
+        title: newTitle.value, 
+        ins: newInstructor.value
+      }
+      console.log(newCourseObj);     
+      allCourses.splice(cartindex, 1, newCourseObj)
       showCourses()
     }
 }
@@ -190,12 +217,14 @@ function ChangeInfo(){
     console.log(index);
     editIndex = index 
   }
-  function showCourses() {
+  const showCourses = () => {
   displayCourse.innerHTML = `
     <thead>
       <tr>
         <td class="fw-bold text-center">S/N</td>
-        <td class="fw-bold text-center">Name</td>
+        <td class="fw-bold text-center">Course Code</td>
+        <td class="fw-bold text-center">Course Title</td>
+        <td class="fw-bold text-center">Instructor</td>
         <td class="fw-bold text-center">Actions</td>
       </tr>
     </thead>`;
@@ -204,7 +233,9 @@ function ChangeInfo(){
       <tbody>
         <tr>
           <td class="text-center">${i+1}.</td>
-          <td class="text-center">${allCourses[i]}</td>
+          <td class="text-center">${allCourses[i].courseId}</td>
+          <td class="text-center">${allCourses[i]. title}</td>
+          <td class="text-center">${allCourses[i].ins}</td>
           <td class="text-center">
             <button class="btn btn-sm btn-warning btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick=editBtn(${i}) >Edit</button>
             <button class="btn btn-sm btn-danger" onclick="deleteOne(${i})">Delete</button>
