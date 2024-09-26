@@ -17,7 +17,7 @@
     <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="Enter your course"id="course">
     <button onclick="addCourse()" class="btn btn-danger w-100 my-1 btn-1">Add course</button>
   </div>
-  
+
   <div class="mx-auto container shadow mt-lg-5 mt-3">
     <table class="px-lg-5 px-2 py-3 table table-borderes table-striped" id="displayCourse">
     <p class="text-center alter alter-secondary" id="initalMsg"></p>
@@ -141,7 +141,7 @@ Modal -->
       var checkCourse = Number(numberToDelete.value)
       if (checkCourse <= allCourses.length){
         // console.log(checkCourse);
-        allCourses.splice(checkCourse -1,1,newCourse.value)
+        allCourses.splice(checkCourse -1, 1,newCourse.value)
         showCourses()
       }else {
         alert("Enter a valid number")
