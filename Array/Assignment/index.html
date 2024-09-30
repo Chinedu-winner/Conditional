@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mx-auto mt-lg-5 mt-3 shadow px-lg-4 py-3 px-2">
+        <h3>Movie collection</h3>
+    <input type="text"class="form-control form-control-sm shadow-none my-3" placeholder="title" id="student">
+    <input type="text" class="form-control form-control-sm shadow-none my-3" placeholder="director" id="director">
+    <input type="text"class="form-control form-control-sm shadow-none my-3" placeholder="Year release" id="year">
+    <button class="btn btn-success w-100 my-1 btn-1" onclick="allsubject()">Delete</button>
+    <button class="btn btn-success w-100 my-1 btn-1" btn btn-primary btn-sm" btn btn-primary data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editcourse()">Edit</button>
+    <!-- Button trigger modal
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="text">
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="ChangeInfo()">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
+    <div id="display"></div>
+    </div>
+
+    <script>
+        function allsubject(){
+            if (student == ""||director == ""|| year =="")
+            var confamu = confamu ("Are you sure you want to deelete it")
+            console.log(confamu);
+            if (confamu == true){
+                allsubject.splice
+            }
+        }
+        function changeInfo(){
+            if(student.value === ''|| director.value== '' || year.value == ''){
+      alert ("Fill in empty space")
+    } else {
+      let newCourseObj = {
+        courseId: director.value,
+        title: student.value, 
+        ins: year.value
+      }
+      console.log(newCourseObj);     
+      allsubject.splice(1, newCourseObj)
+      showCourses()
+    }
+}
+
+        function allsubject(){
+            display.innerHTML += `
+         <thead>
+      <tr>
+        <td class="fw-bold text-center">S/N</td>
+        <td class="fw-bold text-center">movie</td>
+    
+      </tr>
+    </thead>`;
+  for (let i = 0; i < allsubject.length; i++) {
+    displayCourse.innerHTML += `
+      <tbody>
+        <tr>
+          <td class="text-center">${i+1}.</td>
+          <td class="text-center">${allsubject[j].student}</td>
+          <td class="text-center">${allsubject[j]. director}</td>
+          <td class="text-center">${allsubject[j].year}</td>
+          </td>
+        </tr>
+                            `
+                }
+        }
+
+    </script>
+</body>
+</html>
